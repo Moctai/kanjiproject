@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block title %}出典一覧{% endblock title %}
+
+{% block content %}
+                <!-- パンくずリスト -->
+                <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                        <a itemprop="item" href="{% url 'kanjiapp:index' %}"><span itemprop="name">ホーム</span></a>
+                    <meta itemprop="position" content="1" />
+                    </li>
+                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                        <span itemprop="name">出典一覧</span>
+                        <meta itemprop="position" content="2" />
+                    </li>
+                </ol>
+                <h1>出典一覧</h1>
+                <h2>辞典系</h2>{% if source.0 %}
+                <div class="contents_main">
+                    <ul class="ul_source">{% for list in source.0 %}
+                        <li>{{ list }}</li>{% endfor %}
+                    </ul>
+                </div>{% endif %}
+                <h2>その他の文献</h2>{% if source.1 %}
+                <div class="contents_main">
+                    <ul class="ul_source">{% for list in source.1 %}
+                        <li>{{ list }}</li>{% endfor %}
+                    </ul>
+                </div>{% endif %}{% endblock content %}

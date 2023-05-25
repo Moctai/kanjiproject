@@ -1,0 +1,4 @@
+settings_local.py
+settings_secret.py
+__pycache__/
+db.sqlite3

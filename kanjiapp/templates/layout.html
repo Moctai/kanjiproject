@@ -1,0 +1,56 @@
+{% comment %} 静的ファイルのURLを生成するstaticタグをロードする {% endcomment %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}タイトル{% endblock title %} - 漢字表記検索サイト（仮）</title>
+        <link href={% static 'css/style.css' %} rel="stylesheet" type="text/css" media="all">
+    </head>
+    <body>
+        <div id="header_sticky">
+            <div id="header_sticky_l">
+                aaa
+            </div>
+            <div id="header_sticky_c">
+                <form action="{% url 'kanjiapp:result' %}" method="get" class="search_form">
+                    <input type="search" name="q" id="search_box" required>
+                    <select name="search" id="search_menu">
+                        <option value="pre">から始まる</option>
+                        <option value="suf">で終わる</option>
+                        <option value="par">を含む</option>
+                        <option value="exa">に一致する</option>
+                    </select>
+                    <input type="submit" value="検索" id="search_button">
+                </form>
+            </div>
+            <div id="header_sticky_r">
+                aaa
+            </div>
+        </div>
+        <div id="header">
+            漢字表記検索サイト（仮）
+        </div>
+        <div id="main">
+            <div id="contents">{% block content %}{% endblock content %}
+            </div>
+            <div id="menu">
+                <div class="menu_header">ランダム表示</div>
+                <ul class="menu_list_rand">{% for list in rand %}
+                    <li><a href="{% url 'kanjiapp:word' list.id %}">{{ list.hyoki }}</a></li>{% endfor %}
+                </ul>
+                <div class="menu_header">サイト情報</div>
+                <ul class="menu_list">
+                    {% comment %} <li><a href="{% url 'kanjiapp:source' %}">このサイトについて</a></li> {% endcomment %}
+                    {% comment %} <li><a href="{% url 'kanjiapp:source' %}">免責事項</a></li> {% endcomment %}
+                    <li><a href="{% url 'kanjiapp:source' %}">出典一覧</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="footer">
+            © 2023 漢字表記検索サイト（仮）
+        </div>
+    </body>
+</html>

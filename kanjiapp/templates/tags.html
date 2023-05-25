@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% block title %}"#{{ q }}"の言葉{% endblock title %}
+
+{% block content %}
+                <!-- パンくずリスト -->
+                <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                        <a itemprop="item" href="{% url 'kanjiapp:index' %}"><span itemprop="name">ホーム</span></a>
+                    <meta itemprop="position" content="1" />
+                    </li>
+                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                        <span itemprop="name">#{{ q }}</span>
+                        <meta itemprop="position" content="2" />
+                    </li>
+                </ol>
+                <h1>"#{{ q }}"の言葉</h1>
+                <div class="contents_main">{% if link %}
+                    <ul class="word_link">{% for list in link %}
+                        <li>
+                            <a href="{% url 'kanjiapp:word' list.id %}">
+                                <div class="word_link_yomi" style="width: {{ link_len_yomi }}px">
+                                    <div class="word_link_yomi1">{{ list.yomi1 }}</div>{% if list.yomi2 %}
+                                    <div class="word_link_yomi2">{{ list.yomi2 }}</div>{% endif %}
+                                </div>
+                                <div class="word_link_hyoki" style="width: {{ link_len_hyoki }}px">
+                                    <div class="word_link_hyoki1">{{ list.hyoki1 }}</div>{% if list.hyoki2 %}
+                                    <div class="word_link_hyoki2">{{ list.hyoki2 }}</div>{% endif %}
+                                </div>
+                                <div class="word_link_means" style="width: calc(100% - {{ link_len_means }}px)">
+                                    {{ list.means|safe }}
+                                </div>
+                            </a>
+                        </li>{% endfor %}
+                    </ul>{% endif %}
+                </div>{% endblock content %}

@@ -1,0 +1,112 @@
+{% extends 'layout.html' %}
+
+{% block title %}"{{ yomi1 }}"の漢字表記「{{ hyoki1 }}」{% endblock title %}
+
+{% block content %}
+                <!-- パンくずリスト -->
+                <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                        <a itemprop="item" href="{% url 'kanjiapp:index' %}"><span itemprop="name">ホーム</span></a>
+                    <meta itemprop="position" content="1" />
+                    </li>
+                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                        <span itemprop="name">{{ hyoki1 }}（{{ yomi1 }}）</span>
+                        <meta itemprop="position" content="2" />
+                    </li>
+                </ol>
+                <h1>"{{ yomi1 }}"の漢字表記「{{ hyoki1 }}」</h1>
+                <ul id="list_tag">{% if tag %}{% for list in tag %}
+                    <li>
+                        <a href="{% url 'kanjiapp:result' %}?q={{ list }}&search=tag">#{{ list }}</a>
+                    </li>{% endfor %}{% endif %}
+                </ul>
+                <div class="contents_main">
+                    <div id="yomi_hyoki">
+                        <div id="yomi"><b>{{ yomi1 }}</b>{% if yomi2 %}（{{ yomi2 }}）{% endif %}</div>
+                        <div id="hyoki1">{{ hyoki1 }}</div>{% if hyoki2 %}
+                        <div id="hyoki2">{{ hyoki2 }}</div>{% endif %}
+                    </div>
+                    <ol id="list_means2">{% for l in means %}
+                        <li>{{ l|safe }}</li>{% endfor %}
+                    </ol>
+                </div>
+                <h2>表記について</h2>
+                <div class="contents_main">{% if ex %}
+                    <ul class="ul_ex">{% for list in ex %}
+                        <li>{{ list|safe }}</li>{% endfor %}
+                    </ul>{% endif %}{% if ref %}
+                    <h3>出典</h3>
+                    <ul class="ul_main2">{% for list in ref %}
+                        <li>
+                            <div class="hidden_box">
+                                <label for="label{{ list.id }}">
+                                    <div class="hidden_count">{{ list.count }}</div>
+                                    <div class="hidden_yomi" style="width: {{ ref_len_yomi }}px">{{ list.yomi }}</div>
+                                    <div class="hidden_hyoki">{{ list.hyoki }}</div>
+                                </label>
+                                <input type="checkbox" id="label{{ list.id }}"/>
+                                <div class="hidden_show">
+                                    <ul>{% for list2 in list.ref %}
+                                        <li>{{ list2 }}</li>{% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>{% endfor %}
+                    </ul>{% endif %}{% if eg %}
+                    <h3>用例</h3>{% for list in eg %}
+                    <div class="div_eg">
+                        <p class="eg_text">{{ list.txt|safe }}</p>
+                        <p class="eg_title">{{ list.eg }}</p>
+                    </div>{% endfor %}{% endif %}
+                </div>{% if link %}
+                <h2>関連項目</h2>
+                <div class="contents_main">{% if link.rel %}
+                    <h3>関連語</h3>
+                    <ul class="word_link">{% for list in link.rel %}
+                        <li>
+                            <a href="{% url 'kanjiapp:word' list.id %}">
+                                <div class="word_link_yomi" style="width: {{ link_len_yomi.rel }}px">
+                                    <div class="word_link_yomi1">{{ list.yomi1 }}</div>{% if list.yomi2 %}
+                                    <div class="word_link_yomi2">{{ list.yomi2 }}</div>{% endif %}
+                                </div>
+                                <div class="word_link_hyoki" style="width: {{ link_len_hyoki.rel }}px">
+                                    <div class="word_link_hyoki1">{{ list.hyoki1 }}</div>{% if list.hyoki2 %}
+                                    <div class="word_link_hyoki2">{{ list.hyoki2 }}</div>{% endif %}
+                                </div>
+                                <div class="word_link_means" style="width: calc(100% - {{ link_len_means.rel }}px)">{{ list.means|safe }}</div>
+                            </a>
+                        </li>{% endfor %}
+                    </ul>{% endif %}{% if link.yomi %}
+                    <h3>同じ読みの項目</h3>
+                    <ul class="word_link">{% for list in link.yomi %}
+                        <li>
+                            <a href="{% url 'kanjiapp:word' list.id %}">
+                                <div class="word_link_yomi" style="width: {{ link_len_yomi.yomi }}px">
+                                    <div class="word_link_yomi1">{{ list.yomi1 }}</div>{% if list.yomi2 %}
+                                    <div class="word_link_yomi2">{{ list.yomi2 }}</div>{% endif %}
+                                </div>
+                                <div class="word_link_hyoki" style="width: {{ link_len_hyoki.yomi }}px">
+                                    <div class="word_link_hyoki1">{{ list.hyoki1 }}</div>{% if list.hyoki2 %}
+                                    <div class="word_link_hyoki2">{{ list.hyoki2 }}</div>{% endif %}
+                                </div>
+                                <div class="word_link_means" style="width: calc(100% - {{ link_len_means.yomi }}px)">{{ list.means|safe }}</div>
+                            </a>
+                        </li>{% endfor %}
+                    </ul>{% endif %}{% if link.hyoki %}
+                    <h3>同じ漢字の項目</h3>
+                    <ul class="word_link">{% for list in link.hyoki %}
+                        <li>
+                            <a href="{% url 'kanjiapp:word' list.id %}">
+                                <div class="word_link_yomi" style="width: {{ link_len_yomi.hyoki }}px">
+                                    <div class="word_link_yomi1">{{ list.yomi1 }}</div>{% if list.yomi2 %}
+                                    <div class="word_link_yomi2">{{ list.yomi2 }}</div>{% endif %}
+                                </div>
+                                <div class="word_link_hyoki" style="width: {{ link_len_hyoki.hyoki }}px">
+                                    <div class="word_link_hyoki1">{{ list.hyoki1 }}</div>{% if list.hyoki2 %}
+                                    <div class="word_link_hyoki2">{{ list.hyoki2 }}</div>{% endif %}
+                                </div>
+                                <div class="word_link_means" style="width: calc(100% - {{ link_len_means.hyoki }}px)">{{ list.means|safe }}</div>
+                            </a>
+                        </li>{% endfor %}
+                    </ul>{% endif %}
+                </div>{% endif %}{% endblock content %}
