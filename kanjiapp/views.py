@@ -396,6 +396,7 @@ class DisclaimerView(IndexView):
 
         return context
 
+
 # ページ番号からリンクを作成
 def get_link (a, b):  # a: リンク先の番号, b: 現在の番号
     g = {}
@@ -560,3 +561,8 @@ def ja_dict(a):  # a: 仮名の文字列
         i = x.find('ー')
 
     return x
+
+try:
+    from .views_local import *
+except:
+    pass

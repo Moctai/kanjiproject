@@ -1,5 +1,7 @@
 settings_local.py
 settings_secret.py
+urls_local.py
+views_local.py
+local_data.html
 __pycache__/
 db.sqlite3
-local_data.html

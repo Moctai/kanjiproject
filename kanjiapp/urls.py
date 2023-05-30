@@ -11,3 +11,8 @@ urlpatterns = [
     path('disclaimer', views.DisclaimerView.as_view(), name='disclaimer'),
     path('tags', views.TagsView.as_view(), name='tags'),
 ]
+
+try:
+    from .urls_local import *
+except:
+    pass
