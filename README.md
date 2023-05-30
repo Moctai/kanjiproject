@@ -3,7 +3,7 @@
 
 https://moctai.pythonanywhere.com
 ## 使用技術
-Python3、Django、MySQL
+Python3、Django、MySQL、HTML、CSS
 ## 制作目的
 趣味で難読漢字を収集しており、以前から何かしらのアウトプット手段が欲しいと思っていたので、Webアプリ制作の練習も兼ねて制作しました。
 ## 苦労した点
