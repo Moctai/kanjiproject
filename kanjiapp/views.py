@@ -191,11 +191,11 @@ class WordView(IndexView):
             # contextに格納
             context['p'] = p
             context['tag'] = item['tag']
-            context['yomi1'] = '／'.join(item['yomi'])
-            context['yomi2'] = '・'.join(item['yomi'][1:])
+            context['yomi1'] = item['yomi'][0]
+            context['yomi2'] = '／'.join(item['yomi'][1:])
 
             context['hyoki1'] = item['hyoki'][0]
-            context['hyoki2'] = '・'.join(item['hyoki'][1:])
+            context['hyoki2'] = '／'.join(item['hyoki'][1:])
 
             context['means'] = item['means']
             context['ex'] = item['ex']
