@@ -58,18 +58,7 @@ class WordView(IndexView):
         for l in get_item:
             k = l.classification
 
-            # 用例
-            if k == 'eg':
-                pass
-
-            # 関連語
-            elif k == 'rel':
-                pass
-
-            elif k == 'tag':
-                pass
-
-            else:
+            if k != 'eg' and k != 'rel' and k != 'tag':
                 if l.list_id:
                     item[k].append(get_link(l.list_id, p))
                 elif l.txt:
