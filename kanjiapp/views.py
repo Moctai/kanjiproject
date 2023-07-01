@@ -65,19 +65,19 @@ class WordView(IndexView):
                     item[k].append(to_ruby(l.txt))
 
 
+        # 読み・表記・意味が揃っているかをチェック
         if item['yomi'] and item['hyoki'] and item['means']:
 
             # 意味が2つ以上なら番号をつける
             means_id = ['①', '②', '③', '④', '⑤', '⑥', '⑦', '⑧', '⑨', '⑩']
             if len(item['means']) > 1:
-
                 for i in range(len(item['means'])):
                     item['means'][i] = means_id[i] + ' ' + item['means'][i]
 
 
-            # -----
-            # 出典
-            # -----
+            # ----------
+            # 出典を取得
+            # ----------
             rows = Ref.objects.select_related('ref').filter(item_id = p)
 
             refsList = [{
@@ -90,7 +90,7 @@ class WordView(IndexView):
 
             refsListYomihyoki = []
             refsListClassified = []
-            refsLength = {'yomi': 0, 'hyoki': 0}
+            refsLength = {'yomi': 0, 'hyoki': 0}  # 読みと表記の文字数
 
             if refsList:
                 # 出典を並べ替え
@@ -221,6 +221,8 @@ class WordView(IndexView):
 
             context['link_header'] = {'yomi': '同じ読みの項目', 'hyoki': '同じ表記の項目'}
 
+
+        # 読み・表記・意味が揃っていない場合は404エラーを表示
         else:
             self.template_name = '404.html'
 
