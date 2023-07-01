@@ -23,8 +23,7 @@
                 <div class="contents_main">
                     <div id="yomi_hyoki">
                         <div id="yomi"><b>{{ yomi1 }}</b>{% if yomi2 %}（{{ yomi2 }}）{% endif %}</div>
-                        <div id="hyoki1">{{ hyoki1 }}{% if hyoki2 %}／{{ hyoki2 }}{% endif %}</div>{% if hyoki2 %}
-                        <div id="hyoki2">／{{ hyoki2 }}</div>{% endif %}
+                        <div id="hyoki1">{{ hyoki1 }}{% if hyoki2 %}／{{ hyoki2 }}{% endif %}</div>
                     </div>
                     <ol id="list_means2">{% for l in means %}
                         <li>{{ l|safe }}</li>{% endfor %}
