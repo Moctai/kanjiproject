@@ -114,6 +114,11 @@ STATIC_ROOT = '/home/Moctai/kanjiproject/static'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+try:
+    from .settings_local import *
+except:
+    pass
+
 if DEBUG:
     INTERNAL_IPS = ['127.0.0.1']
     INSTALLED_APPS += ['debug_toolbar']
@@ -141,10 +146,5 @@ SECRET_KEY = get_random_secret_key()
 
 try:
     from .settings_secret import *
-except:
-    pass
-
-try:
-    from .settings_local import *
 except:
     pass
