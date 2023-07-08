@@ -116,6 +116,11 @@ select {
     text-decoration: none;
 }
 
+.menu_list li a:hover {
+    background-color: #777;
+    color: #FFF;
+}
+
 .menu_list_rand {
     display: flex;
     justify-content: left;
