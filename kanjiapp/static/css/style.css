@@ -118,7 +118,6 @@ select {
 
 .menu_list li a:hover {
     background-color: darkgray;
-    color: #FFF;
 }
 
 .menu_list_rand {
