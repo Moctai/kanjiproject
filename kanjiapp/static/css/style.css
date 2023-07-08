@@ -133,6 +133,10 @@ select {
     text-decoration: none;
 }
 
+.menu_list_rand a:hover {
+    text-decoration: underline;
+}
+
 
 #main h1 {
     margin: 0;
