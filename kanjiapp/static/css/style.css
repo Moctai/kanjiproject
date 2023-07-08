@@ -117,7 +117,7 @@ select {
 }
 
 .menu_list li a:hover {
-    background-color: #777;
+    background-color: darkgray;
     color: #FFF;
 }
 
