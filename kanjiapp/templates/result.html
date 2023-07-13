@@ -32,10 +32,10 @@
                                 </div>
                             </a>
                         </li>{% endfor %}
-                    </ul>{% endif %}
+                    </ul>{% endif %}{% if page_max > 0 %}
                     <div class="result_page">
                         <a{% if p > 1 %} href="{% url 'kanjiapp:result' %}?q={{ q }}&search={{ search }}&p={{ before_p }}"{% endif %}>＜</a>
                         <span class="now"><b>{{ p }}</b>/{{ page_max }}</span>
                         <a{% if p < page_max %} href="{% url 'kanjiapp:result' %}?q={{ q }}&search={{ search }}&p={{ after_p }}"{% endif %}>＞</a>
-                    </div>
+                    </div>{% endif %}
                 </div>{% endblock content %}

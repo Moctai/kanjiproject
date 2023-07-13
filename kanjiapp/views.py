@@ -291,7 +291,6 @@ class ResultView(IndexView):
                         item_count = len(item_ids)
                         page_max = math.ceil(item_count / 10)  # ページ番号の最大値
 
-                        context['item_count'] = item_count
                         context['page_max'] = page_max
 
                         # ページ番号
@@ -312,6 +311,11 @@ class ResultView(IndexView):
                         context['link_len_yomi'] = item_ids_link[0]
                         context['link_len_hyoki'] = item_ids_link[1]
                         context['link_len_means'] = context['link_len_yomi'] + context['link_len_hyoki']
+                    
+                    else:
+                        item_count = 0
+
+                    context['item_count'] = item_count
 
                     return context
 
