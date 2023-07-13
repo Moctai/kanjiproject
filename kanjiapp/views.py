@@ -243,21 +243,11 @@ class ResultView(IndexView):
                 q = self.request.GET['q']  # 検索ワードを取得
                 search = self.request.GET['search']  # 検索方式を取得
 
-                try:
-                    p = int(self.request.GET['p'])  # ページ番号を取得
-                    if p < 1:
-                        p = 1
-                except (MultiValueDictKeyError, ValueError):
-                    p = 1
-
-                if q and search in ['pre', 'suf', 'par','exa', 'tag']:
+                if q and search in {'pre', 'suf', 'par','exa', 'tag'}:
 
                     context['q'] = q
                     context['q_txt'] = q
                     context['search'] = search
-                    context['p'] = p
-                    context['before_p'] = p - 1
-                    context['after_p'] = p + 1
 
                     context['link'] = []
 
@@ -298,9 +288,23 @@ class ResultView(IndexView):
                     if rows:
                         item_ids = [row.item_id for row in rows]
                         item_ids = list(set(item_ids))
+                        item_count = len(item_ids)
+                        page_max = math.ceil(item_count / 10)  # ページ番号の最大値
 
-                        context['item_count'] = len(item_ids)
-                        context['page_max'] = math.ceil(len(item_ids) / 10)
+                        context['item_count'] = item_count
+                        context['page_max'] = page_max
+
+                        # ページ番号
+                        try:
+                            p = int(self.request.GET['p'])  # ページ番号を取得
+                            if p < 1 or p > page_max:
+                                p = 1
+                        except (MultiValueDictKeyError, ValueError):
+                            p = 1
+
+                        context['p'] = p
+                        context['before_p'] = p - 1
+                        context['after_p'] = p + 1
 
                         item_ids_link = get_link2(p, 10, *item_ids)
 
